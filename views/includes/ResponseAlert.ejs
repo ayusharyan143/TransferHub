@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-md-12">
+
+        <!-- Display messages from request object -->
+        <% if (typeof request.status !== "undefined") { %>
+            <% if (request.status == "success") { %>
+                <div class="alert alert-success">
+                    <%= request.message %>
+                </div>
+            <% } else if (request.status == "error") { %>
+                <div class="alert alert-danger">
+                    <%= request.message %>
+                </div>
+            <% } %>
+        <% } %>
+
+        <!-- Display messages from session object -->
+        <% if (typeof request.session !== "undefined" && typeof request.session.status !== "undefined") { %>
+            <% if (request.session.status == "success") { %>
+                <div class="alert alert-success">
+                    <%= request.session.message %>
+                </div>
+            <% } else if (request.session.status == "error") { %>
+                <div class="alert alert-danger">
+                    <%= request.session.message %>
+                </div>
+            <% } %>
+            <!-- Clean up session after use -->
+            <% delete request.session.status; %>
+            <% delete request.session.message; %>
+        <% } %>
+
+    </div>
+</div>
